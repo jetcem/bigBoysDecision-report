@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReportMEeting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+        }
+        textarea, input {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+        }
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ReportMEeting</h1>
+        <label>Toplantı Başlığı:</label>
+        <input type="text" id="title" placeholder="Başlık giriniz">
+
+        <label>Tarih:</label>
+        <input type="date" id="date">
+
+        <label>Özet:</label>
+        <textarea id="summary" placeholder="Toplantı özetini yazınız..."></textarea>
+
+        <label>Önemli Kararlar & Aksiyonlar:</label>
+        <textarea id="decisions" placeholder="Alınan kararları yazınız..."></textarea>
+
+        <button onclick="sendToWhatsApp()">WhatsApp Grubuna Gönder</button>
+    </div>
+
+    <script>
+        function sendToWhatsApp() {
+            let title = document.getElementById("title").value;
+            let date = document.getElementById("date").value;
+            let summary = document.getElementById("summary").value;
+            let decisions = document.getElementById("decisions").value;
+
+            let message = `📌 *Toplantı Raporu*\n\n📅 Tarih: ${date}\n📝 Başlık: ${title}\n📋 Özet: ${summary}\n✅ Kararlar & Aksiyonlar: ${decisions}`;
+
+            let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, "_blank");
+        }
+    </script>
+</body>
+</html>
